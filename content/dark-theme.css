@@ -1,16 +1,76 @@
 /**
- * Hacker News Dark Mode - Unified Stylesheet
+ * Hacker News Dark Mode - Apple Website Design & Unified Stylesheet
  * Manifest V3 Extension
  * Zero-FOUC (Flash of Unstyled Content) architecture.
+ *
+ * Implements Apple's signature design language:
+ * - Typography: SF Pro Text, SF Pro Display, SF Mono with Apple optical metrics
+ * - Colors: Apple dark palette (#000000, #161617, #1d1d1f, #f5f5f7, #86868b, #6e6e73)
+ * - Accents: Apple system colors (Blue #2997ff, Orange #ff9f0a, Cyan #64d2ff, Green #30d158, Purple #bf5af2)
+ * - Details: Translucent blurred navigation bar, squircle containers, pill buttons, Apple hair-line borders
  */
 
 /* ==========================================================================
-   CSS Custom Properties (Themes & Accents)
+   CSS Custom Properties (Apple Design System, Palettes & Accents)
    ========================================================================== */
 
 :root,
 html:not([data-hn-dark="disabled"]) {
-  /* Default Theme: Charcoal */
+  /* Default Theme: Apple Dark (apple.com signature dark palette) */
+  --hn-bg-page: #000000;
+  --hn-bg-main: #161617;
+  --hn-bg-card: #1d1d1f;
+  --hn-header-bg: #161617;
+  --hn-header-text: #f5f5f7;
+  --hn-text-primary: #f5f5f7;
+  --hn-text-secondary: #86868b;
+  --hn-text-muted: #6e6e73;
+  --hn-text-title: #f5f5f7;
+  --hn-text-visited: #86868b;
+  --hn-border: rgba(255, 255, 255, 0.12);
+  --hn-border-light: rgba(255, 255, 255, 0.18);
+  --hn-input-bg: #1d1d1f;
+  --hn-code-bg: #1d1d1f;
+  --hn-code-border: #333336;
+  --hn-thread-line: rgba(255, 255, 255, 0.10);
+  --hn-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+
+  /* Apple Official Typography Stack */
+  --hn-font-family: "SF Pro Text", "SF Pro Display", "SF Pro Icons", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --hn-font-code: "SF Mono", SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+  /* Default Accent: Apple Blue (#2997ff) */
+  --hn-accent: #2997ff;
+  --hn-accent-hover: #70baff;
+  --hn-accent-secondary: #64d2ff;
+  --hn-accent-dim: rgba(41, 151, 255, 0.15);
+}
+
+/* --- Theme Variations --- */
+
+/* Apple Dark (Explicit) */
+html[data-hn-theme="apple"]:not([data-hn-dark="disabled"]) {
+  --hn-bg-page: #000000;
+  --hn-bg-main: #161617;
+  --hn-bg-card: #1d1d1f;
+  --hn-header-bg: #161617;
+  --hn-header-text: #f5f5f7;
+  --hn-text-primary: #f5f5f7;
+  --hn-text-secondary: #86868b;
+  --hn-text-muted: #6e6e73;
+  --hn-text-title: #f5f5f7;
+  --hn-text-visited: #86868b;
+  --hn-border: rgba(255, 255, 255, 0.12);
+  --hn-border-light: rgba(255, 255, 255, 0.18);
+  --hn-input-bg: #1d1d1f;
+  --hn-code-bg: #1d1d1f;
+  --hn-code-border: #333336;
+  --hn-thread-line: rgba(255, 255, 255, 0.10);
+  --hn-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+}
+
+/* Charcoal Zinc */
+html[data-hn-theme="charcoal"]:not([data-hn-dark="disabled"]) {
   --hn-bg-page: #121214;
   --hn-bg-main: #18181b;
   --hn-bg-card: #202024;
@@ -28,16 +88,7 @@ html:not([data-hn-dark="disabled"]) {
   --hn-code-border: #2e2e36;
   --hn-thread-line: rgba(255, 255, 255, 0.09);
   --hn-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
-  --hn-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-
-  /* Default Accent: Classic HN Orange */
-  --hn-accent: #ff6600;
-  --hn-accent-hover: #ff771a;
-  --hn-accent-secondary: #fb923c;
-  --hn-accent-dim: rgba(255, 102, 0, 0.15);
 }
-
-/* --- Theme Variations --- */
 
 /* OLED Pitch Black */
 html[data-hn-theme="oled"]:not([data-hn-dark="disabled"]) {
@@ -87,7 +138,7 @@ html[data-hn-theme="warm"]:not([data-hn-dark="disabled"]) {
   --hn-bg-main: #231f1c;
   --hn-bg-card: #2d2824;
   --hn-header-bg: #2b2521;
-  --hn-header-text: #f5f0eb;
+  --hn-header-text: #f5f5f7;
   --hn-text-primary: #f5f0eb;
   --hn-text-secondary: #c7beaf;
   --hn-text-muted: #8c8273;
@@ -102,33 +153,54 @@ html[data-hn-theme="warm"]:not([data-hn-dark="disabled"]) {
   --hn-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* --- Accent Variations --- */
+/* --- Accent Variations (Apple System Palette) --- */
 
+/* Apple Blue */
+html[data-hn-accent="blue"]:not([data-hn-dark="disabled"]) {
+  --hn-accent: #2997ff;
+  --hn-accent-hover: #70baff;
+  --hn-accent-secondary: #64d2ff;
+  --hn-accent-dim: rgba(41, 151, 255, 0.15);
+}
+
+/* Apple Orange */
+html[data-hn-accent="orange"]:not([data-hn-dark="disabled"]) {
+  --hn-accent: #ff9f0a;
+  --hn-accent-hover: #ffb340;
+  --hn-accent-secondary: #ffc078;
+  --hn-accent-dim: rgba(255, 159, 10, 0.15);
+}
+
+/* Apple Cyan */
 html[data-hn-accent="cyan"]:not([data-hn-dark="disabled"]) {
-  --hn-accent: #38bdf8;
-  --hn-accent-hover: #0ea5e9;
-  --hn-accent-secondary: #7dd3fc;
-  --hn-accent-dim: rgba(56, 189, 248, 0.15);
+  --hn-accent: #64d2ff;
+  --hn-accent-hover: #8fe0ff;
+  --hn-accent-secondary: #b3ecff;
+  --hn-accent-dim: rgba(100, 210, 255, 0.15);
 }
 
-html[data-hn-accent="emerald"]:not([data-hn-dark="disabled"]) {
-  --hn-accent: #10b981;
-  --hn-accent-hover: #059669;
-  --hn-accent-secondary: #34d399;
-  --hn-accent-dim: rgba(16, 185, 129, 0.15);
+/* Apple Green */
+html[data-hn-accent="emerald"]:not([data-hn-dark="disabled"]),
+html[data-hn-accent="green"]:not([data-hn-dark="disabled"]) {
+  --hn-accent: #30d158;
+  --hn-accent-hover: #34c759;
+  --hn-accent-secondary: #6ee7b7;
+  --hn-accent-dim: rgba(48, 209, 88, 0.15);
 }
 
+/* Apple Purple */
 html[data-hn-accent="purple"]:not([data-hn-dark="disabled"]) {
-  --hn-accent: #a855f7;
-  --hn-accent-hover: #9333ea;
-  --hn-accent-secondary: #c084fc;
-  --hn-accent-dim: rgba(168, 85, 247, 0.15);
+  --hn-accent: #bf5af2;
+  --hn-accent-hover: #d07eff;
+  --hn-accent-secondary: #da8fff;
+  --hn-accent-dim: rgba(191, 90, 242, 0.15);
 }
 
+/* Apple Silver / Monochrome */
 html[data-hn-accent="monochrome"]:not([data-hn-dark="disabled"]) {
-  --hn-accent: #e4e4e7;
+  --hn-accent: #f5f5f7;
   --hn-accent-hover: #ffffff;
-  --hn-accent-secondary: #d4d4d8;
+  --hn-accent-secondary: #86868b;
   --hn-accent-dim: rgba(255, 255, 255, 0.12);
 }
 
@@ -136,6 +208,7 @@ html[data-hn-accent="monochrome"]:not([data-hn-dark="disabled"]) {
 
 html[data-hn-font="classic"]:not([data-hn-dark="disabled"]) {
   --hn-font-family: Verdana, Geneva, sans-serif;
+  letter-spacing: normal !important;
 }
 
 /* ==========================================================================
@@ -151,9 +224,13 @@ html:not([data-hn-dark="disabled"]) body {
   background-color: var(--hn-bg-page) !important;
   color: var(--hn-text-secondary) !important;
   font-family: var(--hn-font-family) !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+  letter-spacing: -0.011em !important;
   margin: 0 !important;
   padding: 0 !important;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1), color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 /* Main Container Card (#hnmain) */
@@ -163,15 +240,15 @@ html:not([data-hn-dark="disabled"]) #hnmain {
   border-top: none !important;
   box-shadow: var(--hn-shadow) !important;
   font-family: var(--hn-font-family) !important;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1), border-color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-/* Comfortable Width Mode (Default) */
+/* Comfortable Width Mode (Default: Apple centered reading column) */
 html:not([data-hn-width="full"]):not([data-hn-dark="disabled"]) #hnmain {
   max-width: 1050px !important;
   width: 90% !important;
-  margin: 14px auto !important;
-  border-radius: 8px !important;
+  margin: 18px auto !important;
+  border-radius: 12px !important;
   overflow: hidden !important;
 }
 
@@ -190,54 +267,62 @@ html:not([data-hn-dark="disabled"]) td {
 }
 
 /* ==========================================================================
-   Header Bar
+   Header Bar (Apple Translucent Frosted Glass Style)
    ========================================================================== */
 
-/* Sleek Dark Header (Default) */
+/* Sleek Apple Dark Header (Default) */
 html:not([data-hn-header="classic"]):not([data-hn-dark="disabled"]) td[bgcolor="#ff6600"] {
   background-color: var(--hn-header-bg) !important;
-  border-bottom: 2px solid var(--hn-accent) !important;
-  padding: 4px 6px !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid var(--hn-border) !important;
+  padding: 6px 10px !important;
 }
 
 /* Classic Orange Header Mode */
 html[data-hn-header="classic"]:not([data-hn-dark="disabled"]) td[bgcolor="#ff6600"] {
   background-color: #ff6600 !important;
   border-bottom: none !important;
-  padding: 2px !important;
+  padding: 3px !important;
 }
 
 /* Navigation items inside header */
 html:not([data-hn-dark="disabled"]) .pagetop {
   font-family: var(--hn-font-family) !important;
   color: var(--hn-header-text) !important;
+  font-size: 13px !important;
+  letter-spacing: -0.01em !important;
 }
 
 html:not([data-hn-header="classic"]):not([data-hn-dark="disabled"]) .pagetop a:link,
 html:not([data-hn-header="classic"]):not([data-hn-dark="disabled"]) .pagetop a:visited {
   color: var(--hn-header-text) !important;
-  padding: 2px 4px !important;
-  border-radius: 3px !important;
-  transition: color 0.15s ease, background-color 0.15s ease;
+  opacity: 0.85 !important;
+  padding: 3px 6px !important;
+  border-radius: 6px !important;
+  text-decoration: none !important;
+  transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease;
 }
 
 html:not([data-hn-header="classic"]):not([data-hn-dark="disabled"]) .pagetop a:hover {
+  opacity: 1 !important;
   color: var(--hn-accent) !important;
-  background-color: rgba(255, 255, 255, 0.06) !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
   text-decoration: none !important;
 }
 
 /* Logo image styling */
 html:not([data-hn-dark="disabled"]) td[bgcolor="#ff6600"] img[src*="y18"] {
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  border-radius: 3px !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-radius: 5px !important;
 }
 
 /* Brand name in header */
 html:not([data-hn-header="classic"]):not([data-hn-dark="disabled"]) .hnname a {
   color: var(--hn-accent) !important;
-  font-weight: 700 !important;
-  letter-spacing: -0.2px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.015em !important;
+  text-decoration: none !important;
 }
 
 /* Current active section in header */
@@ -245,6 +330,7 @@ html:not([data-hn-dark="disabled"]) .topsel a:link,
 html:not([data-hn-dark="disabled"]) .topsel a:visited {
   color: var(--hn-accent) !important;
   font-weight: 600 !important;
+  opacity: 1 !important;
 }
 
 /* ==========================================================================
@@ -256,6 +342,7 @@ html:not([data-hn-dark="disabled"]) .rank {
   color: var(--hn-text-muted) !important;
   font-family: var(--hn-font-family) !important;
   font-size: 9.5pt !important;
+  letter-spacing: -0.01em !important;
 }
 
 /* Story Title */
@@ -264,16 +351,18 @@ html:not([data-hn-dark="disabled"]) .titleline a {
   color: var(--hn-text-title) !important;
   font-family: var(--hn-font-family) !important;
   font-weight: 500 !important;
-  line-height: 1.4 !important;
+  letter-spacing: -0.015em !important;
+  line-height: 1.44 !important;
   text-decoration: none !important;
+  transition: color 0.15s ease;
 }
 
 html:not([data-hn-dark="disabled"]) .titleline a:hover {
   color: var(--hn-accent) !important;
-  text-decoration: underline !important;
+  text-decoration: none !important;
 }
 
-/* Visited Links Dimming (Optional) */
+/* Visited Links Dimming */
 html:not([data-hn-dim-visited="false"]):not([data-hn-dark="disabled"]) .titleline a:visited {
   color: var(--hn-text-visited) !important;
 }
@@ -284,26 +373,29 @@ html:not([data-hn-dark="disabled"]) .sitebit a,
 html:not([data-hn-dark="disabled"]) .sitestr {
   color: var(--hn-text-muted) !important;
   font-size: 8pt !important;
+  letter-spacing: -0.005em !important;
   text-decoration: none !important;
+  transition: color 0.15s ease;
 }
 
 html:not([data-hn-dark="disabled"]) .sitebit a:hover {
   color: var(--hn-accent-secondary) !important;
-  text-decoration: underline !important;
+  text-decoration: none !important;
 }
 
 /* Subtext row (score, author, time, comments) */
 html:not([data-hn-dark="disabled"]) .subtext,
 html:not([data-hn-dark="disabled"]) .subline {
-  color: var(--hn-text-muted) !important;
+  color: var(--hn-text-secondary) !important;
   font-family: var(--hn-font-family) !important;
-  font-size: 7.5pt !important;
+  font-size: 8pt !important;
+  letter-spacing: -0.008em !important;
 }
 
 html:not([data-hn-dark="disabled"]) .subtext a:link,
 html:not([data-hn-dark="disabled"]) .subtext a:visited,
 html:not([data-hn-dark="disabled"]) .age a {
-  color: var(--hn-text-muted) !important;
+  color: var(--hn-text-secondary) !important;
   text-decoration: none !important;
   transition: color 0.15s ease;
 }
@@ -311,7 +403,7 @@ html:not([data-hn-dark="disabled"]) .age a {
 html:not([data-hn-dark="disabled"]) .subtext a:hover,
 html:not([data-hn-dark="disabled"]) .age a:hover {
   color: var(--hn-accent) !important;
-  text-decoration: underline !important;
+  text-decoration: none !important;
 }
 
 /* Score Highlight */
@@ -328,27 +420,30 @@ html:not([data-hn-dark="disabled"]) .hnuser {
 
 /* Spacers between stories */
 html:not([data-hn-dark="disabled"]) tr.spacer {
-  height: 8px !important;
+  height: 9px !important;
 }
 
-/* More link at bottom of stories */
+/* More link at bottom of stories (Apple Pill Button) */
 html:not([data-hn-dark="disabled"]) .morelink {
   color: var(--hn-accent) !important;
   font-family: var(--hn-font-family) !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
   display: inline-block !important;
-  margin: 12px 0 16px !important;
-  padding: 4px 12px !important;
+  margin: 14px 0 18px !important;
+  padding: 6px 16px !important;
   background-color: var(--hn-bg-card) !important;
   border: 1px solid var(--hn-border) !important;
-  border-radius: 4px !important;
+  border-radius: 980px !important;
   text-decoration: none !important;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 html:not([data-hn-dark="disabled"]) .morelink:hover {
-  background-color: var(--hn-accent-dim) !important;
+  background-color: var(--hn-accent) !important;
+  color: #ffffff !important;
   border-color: var(--hn-accent) !important;
+  box-shadow: 0 2px 12px var(--hn-accent-dim) !important;
 }
 
 /* ==========================================================================
@@ -356,21 +451,21 @@ html:not([data-hn-dark="disabled"]) .morelink:hover {
    ========================================================================== */
 
 html:not([data-hn-dark="disabled"]) .votearrow {
-  filter: brightness(0) invert(0.85);
+  filter: brightness(0) invert(0.8);
   transition: filter 0.15s ease, transform 0.15s ease;
 }
 
 html:not([data-hn-dark="disabled"]) .votelinks a:hover .votearrow {
-  filter: brightness(0) invert(1) drop-shadow(0 0 3px var(--hn-accent));
+  filter: brightness(0) invert(1) drop-shadow(0 0 4px var(--hn-accent));
   transform: translateY(-1px);
 }
 
 html:not([data-hn-dark="disabled"]) .votearrow.rotate180 {
-  filter: brightness(0) invert(0.65);
+  filter: brightness(0) invert(0.6);
 }
 
 html:not([data-hn-dark="disabled"]) .votelinks a:hover .votearrow.rotate180 {
-  filter: brightness(0) invert(1) drop-shadow(0 0 3px var(--hn-accent));
+  filter: brightness(0) invert(1) drop-shadow(0 0 4px var(--hn-accent));
   transform: rotate(180deg) translateY(-1px);
 }
 
@@ -383,19 +478,22 @@ html:not([data-hn-dark="disabled"]) .comment-tree {
 }
 
 html:not([data-hn-dark="disabled"]) .comhead {
-  color: var(--hn-text-muted) !important;
+  color: var(--hn-text-secondary) !important;
   font-family: var(--hn-font-family) !important;
   font-size: 8pt !important;
+  letter-spacing: -0.008em !important;
 }
 
 html:not([data-hn-dark="disabled"]) .comhead a:link,
 html:not([data-hn-dark="disabled"]) .comhead a:visited {
-  color: var(--hn-text-muted) !important;
+  color: var(--hn-text-secondary) !important;
   text-decoration: none !important;
+  transition: color 0.15s ease;
 }
 
 html:not([data-hn-dark="disabled"]) .comhead a:hover {
   color: var(--hn-accent) !important;
+  text-decoration: none !important;
 }
 
 /* Comment Body Text */
@@ -405,14 +503,16 @@ html:not([data-hn-dark="disabled"]) .commtext {
   font-family: var(--hn-font-family) !important;
   font-size: 9.5pt !important;
   line-height: 1.55 !important;
+  letter-spacing: -0.011em !important;
 }
 
 /* Links inside comments */
 html:not([data-hn-dark="disabled"]) .commtext a:link {
   color: var(--hn-accent) !important;
-  text-decoration: underline !important;
-  text-underline-offset: 2px !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid var(--hn-accent-dim) !important;
   word-break: break-all !important;
+  transition: border-color 0.15s ease, opacity 0.15s ease;
 }
 
 html:not([data-hn-dark="disabled"]) .commtext a:visited {
@@ -420,34 +520,37 @@ html:not([data-hn-dark="disabled"]) .commtext a:visited {
 }
 
 html:not([data-hn-dark="disabled"]) .commtext a:hover {
-  filter: brightness(1.2);
+  border-bottom-color: var(--hn-accent) !important;
+  opacity: 0.85 !important;
 }
 
 /* Reply link below comment */
 html:not([data-hn-dark="disabled"]) .reply a:link,
 html:not([data-hn-dark="disabled"]) .reply a:visited {
-  color: var(--hn-text-muted) !important;
+  color: var(--hn-text-secondary) !important;
   font-size: 7.5pt !important;
+  letter-spacing: -0.005em !important;
   text-decoration: none !important;
   display: inline-block !important;
-  padding: 2px 6px !important;
-  border-radius: 3px !important;
+  padding: 3px 8px !important;
+  border-radius: 6px !important;
   background-color: var(--hn-bg-card) !important;
   border: 1px solid var(--hn-border) !important;
-  transition: all 0.15s ease;
+  transition: all 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 html:not([data-hn-dark="disabled"]) .reply a:hover {
   color: var(--hn-accent) !important;
   border-color: var(--hn-accent) !important;
+  background-color: var(--hn-accent-dim) !important;
 }
 
 /* Toggle Collapse Button `[-]` */
 html:not([data-hn-dark="disabled"]) .togg {
   color: var(--hn-text-muted) !important;
-  font-weight: bold !important;
-  padding: 0 4px !important;
-  border-radius: 3px !important;
+  font-weight: 600 !important;
+  padding: 1px 5px !important;
+  border-radius: 4px !important;
   text-decoration: none !important;
   cursor: pointer !important;
   transition: all 0.15s ease;
@@ -458,7 +561,7 @@ html:not([data-hn-dark="disabled"]) .togg:hover {
   background-color: rgba(255, 255, 255, 0.08) !important;
 }
 
-/* --- Comment Nesting Guide Lines --- */
+/* --- Comment Nesting Guide Lines (Apple Hairlines) --- */
 html:not([data-hn-guides="false"]):not([data-hn-dark="disabled"]) table.comment-tree tr.comtr td.ind {
   background-image: repeating-linear-gradient(
     to right,
@@ -516,43 +619,44 @@ html:not([data-hn-dark="disabled"]) .cdd {
 }
 
 /* ==========================================================================
-   Code Blocks & Preformatted Text
+   Code Blocks & Preformatted Text (Apple SF Mono)
    ========================================================================== */
 
 html:not([data-hn-dark="disabled"]) pre,
 html:not([data-hn-dark="disabled"]) code {
   background-color: var(--hn-code-bg) !important;
-  color: #38bdf8 !important;
+  color: #64d2ff !important;
   border: 1px solid var(--hn-code-border) !important;
-  border-radius: 6px !important;
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace !important;
+  border-radius: 8px !important;
+  font-family: var(--hn-font-code) !important;
   font-size: 8.5pt !important;
 }
 
 html:not([data-hn-dark="disabled"]) pre {
-  padding: 10px 14px !important;
+  padding: 12px 14px !important;
   margin: 8px 0 !important;
   overflow-x: auto !important;
-  line-height: 1.45 !important;
+  line-height: 1.48 !important;
 }
 
 html:not([data-hn-dark="disabled"]) code {
-  padding: 2px 5px !important;
+  padding: 2px 6px !important;
 }
 
 /* ==========================================================================
-   Form Controls, Inputs, and Textareas
+   Form Controls, Inputs, and Textareas (Apple Style)
    ========================================================================== */
 
 html:not([data-hn-dark="disabled"]) textarea {
   background-color: var(--hn-input-bg) !important;
   color: var(--hn-text-primary) !important;
   border: 1px solid var(--hn-border-light) !important;
-  border-radius: 6px !important;
+  border-radius: 8px !important;
   padding: 10px 12px !important;
   font-family: var(--hn-font-family) !important;
   font-size: 10pt !important;
   line-height: 1.5 !important;
+  letter-spacing: -0.01em !important;
   box-sizing: border-box !important;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
   outline: none !important;
@@ -560,7 +664,7 @@ html:not([data-hn-dark="disabled"]) textarea {
 
 html:not([data-hn-dark="disabled"]) textarea:focus {
   border-color: var(--hn-accent) !important;
-  box-shadow: 0 0 0 2px var(--hn-accent-dim) !important;
+  box-shadow: 0 0 0 3px var(--hn-accent-dim) !important;
 }
 
 html:not([data-hn-dark="disabled"]) input[type="text"],
@@ -568,16 +672,17 @@ html:not([data-hn-dark="disabled"]) input[type="password"] {
   background-color: var(--hn-input-bg) !important;
   color: var(--hn-text-primary) !important;
   border: 1px solid var(--hn-border-light) !important;
-  border-radius: 5px !important;
-  padding: 6px 10px !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+  font-family: var(--hn-font-family) !important;
   outline: none !important;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 html:not([data-hn-dark="disabled"]) input[type="text"]:focus,
 html:not([data-hn-dark="disabled"]) input[type="password"]:focus {
   border-color: var(--hn-accent) !important;
-  box-shadow: 0 0 0 2px var(--hn-accent-dim) !important;
+  box-shadow: 0 0 0 3px var(--hn-accent-dim) !important;
 }
 
 html:not([data-hn-dark="disabled"]) input[readonly] {
@@ -591,13 +696,14 @@ html:not([data-hn-dark="disabled"]) button {
   background-color: var(--hn-bg-card) !important;
   color: var(--hn-text-primary) !important;
   border: 1px solid var(--hn-border-light) !important;
-  border-radius: 5px !important;
-  padding: 6px 14px !important;
+  border-radius: 980px !important;
+  padding: 6px 16px !important;
   font-family: var(--hn-font-family) !important;
   font-size: 9pt !important;
   font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
   cursor: pointer !important;
-  transition: all 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
 }
 
 html:not([data-hn-dark="disabled"]) input[type="submit"]:hover,
@@ -605,6 +711,7 @@ html:not([data-hn-dark="disabled"]) button:hover {
   background-color: var(--hn-accent) !important;
   color: #ffffff !important;
   border-color: var(--hn-accent) !important;
+  box-shadow: 0 2px 10px var(--hn-accent-dim) !important;
 }
 
 /* ==========================================================================
@@ -615,12 +722,18 @@ html:not([data-hn-dark="disabled"]) .toptext {
   color: var(--hn-text-primary) !important;
   line-height: 1.6 !important;
   font-size: 9.5pt !important;
-  margin-bottom: 12px !important;
+  letter-spacing: -0.01em !important;
+  margin-bottom: 14px !important;
 }
 
 html:not([data-hn-dark="disabled"]) .toptext a:link,
 html:not([data-hn-dark="disabled"]) .toptext a:visited {
   color: var(--hn-accent) !important;
+  text-decoration: none !important;
+}
+
+html:not([data-hn-dark="disabled"]) .toptext a:hover {
+  text-decoration: underline !important;
 }
 
 /* ==========================================================================
@@ -640,25 +753,47 @@ html:not([data-hn-dark="disabled"]) .yclinks a:visited {
 
 html:not([data-hn-dark="disabled"]) .yclinks a:hover {
   color: var(--hn-accent) !important;
-  text-decoration: underline !important;
+  text-decoration: none !important;
 }
 
 /* Search form at footer */
 html:not([data-hn-dark="disabled"]) form[action*="algolia"] {
   color: var(--hn-text-muted) !important;
-  margin: 12px 0 !important;
+  margin: 14px 0 !important;
 }
 
 html:not([data-hn-dark="disabled"]) form[action*="algolia"] input[type="text"] {
   background-color: var(--hn-input-bg) !important;
   border: 1px solid var(--hn-border) !important;
-  border-radius: 4px !important;
-  padding: 4px 8px !important;
+  border-radius: 8px !important;
+  padding: 5px 10px !important;
   color: var(--hn-text-primary) !important;
 }
 
 /* User profile pages */
 html:not([data-hn-dark="disabled"]) form.profileform td {
-  padding: 4px 6px !important;
+  padding: 5px 8px !important;
   color: var(--hn-text-primary) !important;
+}
+
+/* ==========================================================================
+   Apple Custom Scrollbars
+   ========================================================================== */
+
+html:not([data-hn-dark="disabled"]) ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html:not([data-hn-dark="disabled"]) ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html:not([data-hn-dark="disabled"]) ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+}
+
+html:not([data-hn-dark="disabled"]) ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.32);
 }

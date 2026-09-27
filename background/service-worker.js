@@ -6,9 +6,9 @@
 
 const DEFAULT_SETTINGS = {
   enabled: true,
-  theme: 'charcoal',
-  accent: 'orange',
-  font: 'modern',
+  theme: 'apple',
+  accent: 'blue',
+  font: 'apple',
   maxWidth: 'comfortable',
   commentGuides: true,
   headerStyle: 'dark',
@@ -22,7 +22,7 @@ async function updateActionBadge(enabled) {
   try {
     if (!enabled) {
       await chrome.action.setBadgeText({ text: 'OFF' });
-      await chrome.action.setBadgeBackgroundColor({ color: '#6b7280' });
+      await chrome.action.setBadgeBackgroundColor({ color: '#86868b' });
     } else {
       await chrome.action.setBadgeText({ text: '' });
     }
@@ -85,7 +85,7 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 });
 
 /**
- * Handle keyboard shortcuts (e.g., Alt+Shift+D).
+ * Handle keyboard shortcuts (e.g., Option+Shift+D on macOS / Alt+Shift+D).
  */
 chrome.commands.onCommand.addListener(async (command) => {
   if (command === 'toggle_theme') {

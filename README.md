@@ -1,25 +1,36 @@
 # Hacker News Dark Mode — Chrome Extension (Manifest V3)
 
-A high-performance, customizable dark mode extension for [Hacker News](https://news.ycombinator.com). Built with Manifest V3 and zero-flash-of-unstyled-content (Zero-FOUC) architecture.
+A high-performance, beautifully crafted dark mode extension for [Hacker News](https://news.ycombinator.com), inspired by **Apple website design language, colors, and SF Pro typography**. Built with Manifest V3 and zero-flash-of-unstyled-content (Zero-FOUC) architecture.
 
 ![Hacker News Dark Mode Icon](icons/icon-128.png)
 
 ## 🚀 Features
 
-- **Zero White Flash (0 FOUC)**: Theme styles inject at `document_start` so the page never flashes white on load or navigation.
-- **4 Curated Palettes**:
-  - **Charcoal** (Default): Sleek dark zinc, easy on the eyes.
-  - **OLED Black**: Pitch black `#000000` for OLED screens and maximum battery life.
-  - **Nord Blue**: Frosty slate-blue aesthetic.
+- **Apple Website Color Palette**:
+  - **Apple Dark (Default)**: Apple's official dark mode web palette (`#000000` true black page, `#161617` container surface, `#1d1d1f` cards, `#f5f5f7` text, `#86868b` subtext, `#6e6e73` muted).
+  - **Charcoal Zinc**: Sleek dark zinc aesthetic (`#121214` / `#18181b`).
+  - **OLED Pure Black**: Complete `#000000` pitch black for maximum OLED battery savings.
+  - **Nord Arctic Slate**: Frosty slate-blue palette (`#1e222a` / `#242933`).
   - **Warm Coffee**: Warm espresso tones for relaxed nighttime reading.
-- **5 Accent Highlights**: Classic HN Orange, Electric Cyan, Emerald Green, Neon Purple, and Minimal Monochrome.
-- **Comment Thread Guides**: Vertical indentation guide lines along nested reply chains so you never lose your place in deep discussions.
+- **Apple SF Pro & SF Mono Typography**:
+  - Native Apple font stack: `"SF Pro Text"`, `"SF Pro Display"`, `"SF Pro Icons"`, `-apple-system`, `BlinkMacSystemFont`.
+  - Monospace code styling: `"SF Mono"`, `ui-monospace`, `Menlo`.
+  - Apple optical kerning, `-webkit-font-smoothing: antialiased`, and subpixel text rendering.
+  - Option to toggle back to classic Hacker News Verdana anytime.
+- **Apple System Accents**:
+  - **Apple Blue** (`#2997ff` - default signature web link & CTA color)
+  - **Apple Orange** (`#ff9f0a` - Apple dark mode vibrant orange)
+  - **Apple Cyan** (`#64d2ff` - Apple teal/cyan)
+  - **Apple Green** (`#30d158` - Apple iOS/macOS mint green)
+  - **Apple Purple** (`#bf5af2` - Apple indigo/purple)
+  - **Apple Silver / Monochrome** (`#f5f5f7`)
+- **Apple Translucent Frosted Glass Header**:
+  - Navbar with `backdrop-filter: blur(20px) saturate(180%)` and subtle hairline border separator.
+- **Zero White Flash (0 FOUC)**: Theme styles inject at `document_start` so the page never flashes white on load or navigation.
+- **Comment Thread Guides**: Delicate vertical guide lines along nested reply chains so you never lose your place in deep discussions.
 - **Dim Visited Stories**: Subtle dimming of visited links so you can distinguish fresh content from read articles.
-- **Customizable Layout**:
-  - Switch between modern clean sans-serif typography and classic Hacker News Verdana.
-  - Choose between comfortable centered reading width (1050px) or full width (85%).
-  - Sleek dark header bar or classic Hacker News orange banner.
-- **Keyboard Shortcut**: Press `Alt + Shift + D` (or `Option + Shift + D` on macOS) to toggle dark mode on/off on any Hacker News tab.
+- **Comfortable Reading Width**: Apple-inspired centered reading container (`1050px`) with 12px smooth squircle corners and soft diffused drop shadow.
+- **Keyboard Shortcut**: Press `⌥ + ⇧ + D` (Mac) or `Alt + Shift + D` (Windows/Linux) to toggle dark mode instantly on any Hacker News tab.
 - **Real-Time Synchronization**: Any setting changed in the popup immediately updates active Hacker News tabs without needing a page refresh.
 - **100% Privacy-Focused**: No analytics, no third-party requests, and zero data tracking.
 
@@ -31,8 +42,8 @@ A high-performance, customizable dark mode extension for [Hacker News](https://n
 2. Navigate to `chrome://extensions` in the address bar.
 3. Enable **Developer mode** using the toggle switch in the top-right corner.
 4. Click **Load unpacked** in the top-left corner.
-5. Select the project folder
-6. The extension is now installed and active! Visit [news.ycombinator.com](https://news.ycombinator.com) to experience dark mode.
+5. Select this project folder (`hacker-news-dark-mode`).
+6. The extension is now installed and active! Visit [news.ycombinator.com](https://news.ycombinator.com) to experience Apple dark mode.
 
 ---
 
@@ -47,13 +58,13 @@ hacker-news-dark-mode/
 │   ├── icon-48.png            # 48x48 icon
 │   └── icon-128.png           # 128x128 icon
 ├── content/
-│   ├── dark-theme.css         # Complete dark theme styling with variables
+│   ├── dark-theme.css         # Complete Apple-inspired dark stylesheet with CSS variables
 │   └── content.js             # Content script executing at document_start
 ├── background/
 │   └── service-worker.js      # Service worker for shortcuts & badge state
 ├── popup/
 │   ├── popup.html             # Extension settings popup UI
-│   ├── popup.css              # Modern dark popup styles
+│   ├── popup.css              # Apple HIG dark popup styles & iOS toggles
 │   └── popup.js               # Reactive popup logic & storage sync
 ├── scripts/
 │   └── generate_icons.py      # Standalone icon generator
@@ -66,16 +77,16 @@ hacker-news-dark-mode/
 
 Open the extension popup by clicking the icon in the browser toolbar:
 - **Master Switch**: Turns dark mode on or off.
-- **Palette**: Charcoal, OLED Black, Nord Blue, Warm Coffee.
-- **Accents**: Orange, Cyan, Emerald, Purple, Monochrome.
+- **Palette**: Apple Dark (Official), Charcoal, OLED Black, Nord Blue, Warm Coffee.
+- **Accents**: Apple Blue, Apple Orange, Apple Cyan, Apple Green, Apple Purple, Apple Silver.
 - **Comment Guides**: Toggle vertical thread guide lines.
 - **Dim Visited Stories**: Dim previously viewed links.
-- **Modern Typography**: Toggle system sans-serif vs classic Verdana.
+- **Apple SF Pro Typography**: Toggle SF Pro / SF Mono vs classic Verdana.
 - **Comfortable Max-Width**: Centered reading column vs full 85%.
-- **Sleek Header**: Toggle dark nav bar vs classic orange banner.
+- **Apple Translucent Header**: Toggle frosted glass dark nav bar vs classic orange banner.
 
 ---
 
 ## ⌨️ Shortcuts
 
-- `Alt + Shift + D` (Mac: `Option + Shift + D`): Toggle dark mode instantly.
+- `⌥ + ⇧ + D` (Mac) / `Alt + Shift + D` (Windows/Linux): Toggle dark mode instantly.

@@ -8,21 +8,22 @@
 Hacker News Dark Mode
 
 **Short Description** [REQUIRED]
-Clean, customizable dark mode theme for Hacker News (news.ycombinator.com) with zero flash of unstyled content.
+Apple-inspired dark mode theme for Hacker News (news.ycombinator.com) with SF Pro typography and zero flash of unstyled content.
 
 **Detailed Description** [REQUIRED]
-A modern, lightweight dark mode theme crafted specifically for Hacker News (news.ycombinator.com).
+A modern, lightweight dark mode extension crafted specifically for Hacker News (news.ycombinator.com), inspired by Apple website aesthetics, colors, and SF Pro typography.
 
-Tired of the bright white glare while reading late-night tech discussions? Hacker News Dark Mode delivers a high-contrast, eye-friendly reading experience with zero white flash on page load (0 FOUC).
+Tired of the harsh white glare while reading late-night tech discussions? Hacker News Dark Mode delivers a refined, eye-friendly reading experience with zero white flash on page load (0 FOUC).
 
 KEY FEATURES:
-- 4 Curated Dark Themes: Charcoal (default sleek zinc), OLED Pure Black, Nord Arctic Slate, and Warm Espresso Coffee.
-- 5 Accent Highlights: Classic HN Orange, Electric Sky Cyan, Emerald Tech Green, Neon Violet, and Minimal Monochrome.
+- Apple Website Color Palette: Apple Dark (default sleek surface #000000 / #161617 / #1d1d1f), Charcoal Zinc, OLED Pure Black, Nord Arctic Slate, and Warm Espresso Coffee.
+- Apple SF Pro & SF Mono Typography: Native Apple font stack ("SF Pro Text", "SF Pro Display", "SF Mono") with antialiasing and optical kerning, plus classic Verdana toggle.
+- 6 Apple System Accents: Apple Blue (#2997ff), Apple Orange (#ff9f0a), Apple Cyan (#64d2ff), Apple Green (#30d158), Apple Purple (#bf5af2), and Apple Silver (#f5f5f7).
+- Apple Translucent Header: Frosted-glass navigation bar with backdrop blur and hairline separator.
 - Comment Thread Indentation Guides: Clean vertical guide lines down nested comment trees make long, complex discussions effortless to follow.
 - Dim Visited Stories: Visited articles are subtly dimmed so you immediately know which threads you have already explored.
-- Modern or Classic Typography: Choose between modern system sans-serif and classic Hacker News Verdana.
-- Comfortable Reading Width: Centered reading column on widescreen monitors with an option to toggle back to classic full width.
-- Instant Keyboard Toggle: Press Alt+Shift+D (Option+Shift+D on Mac) anywhere on Hacker News to toggle dark mode instantly.
+- Comfortable Reading Width: Centered reading column on widescreen monitors with rounded corners, or classic full width.
+- Instant Keyboard Toggle: Press ⌥+⇧+D on Mac (or Alt+Shift+D on Windows/Linux) anywhere on Hacker News to toggle dark mode instantly.
 - Zero Flash of Unstyled Content (Zero-FOUC): CSS is injected before DOM paint begins, guaranteeing an immediate dark canvas every time.
 - Private & Lightweight: No tracking, no ads, no external server requests, and zero analytics.
 
@@ -30,7 +31,7 @@ HOW TO USE:
 1. Install the extension.
 2. Visit https://news.ycombinator.com — dark mode activates automatically.
 3. Click the extension icon in your Chrome toolbar to customize palettes, accents, thread lines, and layout preferences.
-4. Press Alt+Shift+D (Mac: Option+Shift+D) to toggle on or off anytime.
+4. Press Option+Shift+D (Alt+Shift+D) to toggle on or off anytime.
 
 PRIVACY & PERMISSIONS:
 This extension respects your privacy completely. It operates strictly locally on news.ycombinator.com and does not collect, transmit, or store any personal data or browsing history.
@@ -42,7 +43,7 @@ Found a bug or have a suggestion? Open an issue on our GitHub repository.
 Productivity
 
 **Single Purpose** [REQUIRED]
-Applies a customizable dark mode theme to Hacker News (news.ycombinator.com) to improve readability in low-light environments.
+Applies an Apple-inspired dark mode theme to Hacker News (news.ycombinator.com) to improve readability and visual comfort.
 
 **Primary Language** [REQUIRED]
 English
@@ -59,9 +60,9 @@ English
 | Marquee Promo Tile | 1400×560 | ⬜ Ready to capture | |
 
 ### Screenshot Notes
-- Screenshot 1: Hacker News front page in Charcoal Dark Mode with classic orange accent and comfortable width.
-- Screenshot 2: Deep comment thread showing the vertical indentation guide lines and code snippet formatting.
-- Screenshot 3: The extension popup open, showcasing the palette picker (OLED, Nord, Warm Coffee) and live accent switches.
+- Screenshot 1: Hacker News front page in Apple Dark Mode with Apple Blue accent and comfortable reading width.
+- Screenshot 2: Deep comment thread showing SF Pro typography, vertical indentation guide lines, and SF Mono code blocks.
+- Screenshot 3: The extension popup open, showcasing the Apple-styled interface with palette choices, live Apple system accents, and iOS switches.
 
 ## Permissions Justification
 
@@ -107,7 +108,7 @@ https://news.ycombinator.com
 
 | Version | Date | Changes | Status |
 |---------|------|---------|--------|
-| 1.0.0 | 2026-09-27 | Initial release: 4 themes, 5 accents, thread guide lines, zero-FOUC architecture, popup UI, shortcut support. | Draft |
+| 1.0.0 | 2026-09-27 | Initial release: Apple website dark palette, SF Pro / SF Mono typography, Apple system accents, zero-FOUC architecture, popup UI, shortcut support. | Draft |
 
 ## Review Notes
 

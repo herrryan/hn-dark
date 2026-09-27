@@ -1,6 +1,7 @@
 /**
  * Hacker News Dark Mode - Popup Script
  * Handles real-time customization, state persistence via chrome.storage.
+ * Grounded in Apple Human Interface Guidelines.
  */
 
 (() => {
@@ -8,9 +9,9 @@
 
   const DEFAULT_SETTINGS = {
     enabled: true,
-    theme: 'charcoal',
-    accent: 'orange',
-    font: 'modern',
+    theme: 'apple',
+    accent: 'blue',
+    font: 'apple',
     maxWidth: 'comfortable',
     commentGuides: true,
     headerStyle: 'dark',
@@ -18,11 +19,12 @@
   };
 
   const ACCENT_COLORS = {
-    orange: '#ff6600',
-    cyan: '#38bdf8',
-    emerald: '#10b981',
-    purple: '#a855f7',
-    monochrome: '#e4e4e7'
+    blue: '#2997ff',
+    orange: '#ff9f0a',
+    cyan: '#64d2ff',
+    emerald: '#30d158',
+    purple: '#bf5af2',
+    monochrome: '#f5f5f7'
   };
 
   // DOM Elements
@@ -36,6 +38,7 @@
   const toggleWidth = document.getElementById('toggle-width');
   const toggleHeader = document.getElementById('toggle-header');
   const openHnLink = document.getElementById('open-hn');
+  const shortcutBadge = document.querySelector('.shortcut-badge');
 
   /**
    * Helper to get storage area
@@ -48,8 +51,8 @@
    * Update active accent visual highlight inside popup
    */
   function updatePopupAccentColor(accent) {
-    const color = ACCENT_COLORS[accent] || ACCENT_COLORS.orange;
-    document.documentElement.style.setProperty('--accent-orange', color);
+    const color = ACCENT_COLORS[accent] || ACCENT_COLORS.blue;
+    document.documentElement.style.setProperty('--accent-active', color);
   }
 
   /**
@@ -88,7 +91,7 @@
     // Option Toggles
     toggleGuides.checked = settings.commentGuides !== false;
     toggleDimVisited.checked = settings.dimVisited !== false;
-    toggleFont.checked = (settings.font || DEFAULT_SETTINGS.font) === 'modern';
+    toggleFont.checked = (settings.font || DEFAULT_SETTINGS.font) !== 'classic';
     toggleWidth.checked = (settings.maxWidth || DEFAULT_SETTINGS.maxWidth) === 'comfortable';
     toggleHeader.checked = (settings.headerStyle || DEFAULT_SETTINGS.headerStyle) === 'dark';
   }
@@ -150,9 +153,9 @@
       await saveSetting({ dimVisited: toggleDimVisited.checked });
     });
 
-    // Modern Typography
+    // Apple SF Pro Typography
     toggleFont.addEventListener('change', async () => {
-      const font = toggleFont.checked ? 'modern' : 'classic';
+      const font = toggleFont.checked ? 'apple' : 'classic';
       await saveSetting({ font });
     });
 
@@ -170,9 +173,14 @@
   }
 
   /**
-   * Detect current active tab
+   * Detect current active tab and customize shortcut label for macOS
    */
-  async function checkActiveTab() {
+  async function checkPlatformAndTab() {
+    // macOS keybinding representation
+    if (shortcutBadge && navigator.platform && navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+      shortcutBadge.textContent = '⌥ + ⇧ + D';
+    }
+
     try {
       const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
       if (tab?.url && tab.url.includes('news.ycombinator.com')) {
@@ -200,7 +208,7 @@
       renderSettings(DEFAULT_SETTINGS);
     }
 
-    await checkActiveTab();
+    await checkPlatformAndTab();
   }
 
   document.addEventListener('DOMContentLoaded', init);

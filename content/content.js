@@ -1,17 +1,17 @@
 /**
  * Hacker News Dark Mode - Content Script
- * Runs at document_start to apply dark theme settings instantaneously without FOUC.
+ * Runs at document_start to apply Apple-inspired dark theme settings instantaneously without FOUC.
  */
 
 (() => {
   'use strict';
 
-  // Default configuration
+  // Default configuration (Apple website dark theme defaults)
   const DEFAULT_SETTINGS = {
     enabled: true,
-    theme: 'charcoal',      // charcoal, oled, nord, warm
-    accent: 'orange',       // orange, cyan, emerald, purple, monochrome
-    font: 'modern',         // modern, classic
+    theme: 'apple',         // apple, charcoal, oled, nord, warm
+    accent: 'blue',         // blue, orange, cyan, emerald, purple, monochrome
+    font: 'apple',          // apple, classic
     maxWidth: 'comfortable',// comfortable, full
     commentGuides: true,    // boolean
     headerStyle: 'dark',    // dark, classic
