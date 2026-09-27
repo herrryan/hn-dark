@@ -31,10 +31,7 @@ A high-performance, customizable dark mode extension for [Hacker News](https://n
 2. Navigate to `chrome://extensions` in the address bar.
 3. Enable **Developer mode** using the toggle switch in the top-right corner.
 4. Click **Load unpacked** in the top-left corner.
-5. Select the project folder:
-   ```text
-   /Users/guofei/workspace/hacker-news-dark-mode
-   ```
+5. Select the project folder
 6. The extension is now installed and active! Visit [news.ycombinator.com](https://news.ycombinator.com) to experience dark mode.
 
 ---
