@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacker News Dark Mode</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header with Master Toggle -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo-box">
+          <span class="logo-letter">Y</span>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">HN Dark Mode</h1>
+          <span class="brand-subtitle">news.ycombinator.com</span>
+        </div>
+      </div>
+      <label class="switch" title="Toggle dark mode on/off">
+        <input type="checkbox" id="toggle-enabled">
+        <span class="slider"></span>
+      </label>
+    </header>
+
+    <main class="settings-body" id="settings-group">
+      <!-- Theme Selection -->
+      <section class="section">
+        <div class="section-title">Color Palette</div>
+        <div class="theme-grid">
+          <button type="button" class="theme-btn" data-theme="charcoal">
+            <span class="theme-preview charcoal"></span>
+            <span class="theme-label">Charcoal</span>
+          </button>
+          <button type="button" class="theme-btn" data-theme="oled">
+            <span class="theme-preview oled"></span>
+            <span class="theme-label">OLED Black</span>
+          </button>
+          <button type="button" class="theme-btn" data-theme="nord">
+            <span class="theme-preview nord"></span>
+            <span class="theme-label">Nord Blue</span>
+          </button>
+          <button type="button" class="theme-btn" data-theme="warm">
+            <span class="theme-preview warm"></span>
+            <span class="theme-label">Warm Coffee</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Accent Color Selection -->
+      <section class="section">
+        <div class="section-title">Accent Color</div>
+        <div class="accent-row">
+          <button type="button" class="accent-btn" data-accent="orange" title="HN Orange">
+            <span class="accent-dot orange"></span>
+          </button>
+          <button type="button" class="accent-btn" data-accent="cyan" title="Sky Cyan">
+            <span class="accent-dot cyan"></span>
+          </button>
+          <button type="button" class="accent-btn" data-accent="emerald" title="Emerald Green">
+            <span class="accent-dot emerald"></span>
+          </button>
+          <button type="button" class="accent-btn" data-accent="purple" title="Neon Purple">
+            <span class="accent-dot purple"></span>
+          </button>
+          <button type="button" class="accent-btn" data-accent="monochrome" title="Minimal Monochrome">
+            <span class="accent-dot monochrome"></span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Options List -->
+      <section class="section">
+        <div class="section-title">Customization</div>
+        <div class="options-list">
+          <!-- Thread Guides -->
+          <div class="option-row">
+            <div class="option-info">
+              <span class="option-name">Comment Thread Lines</span>
+              <span class="option-desc">Subtle vertical guides for nested replies</span>
+            </div>
+            <label class="switch-small">
+              <input type="checkbox" id="toggle-guides">
+              <span class="slider-small"></span>
+            </label>
+          </div>
+
+          <!-- Dim Visited Links -->
+          <div class="option-row">
+            <div class="option-info">
+              <span class="option-name">Dim Visited Stories</span>
+              <span class="option-desc">Easily spot articles you already read</span>
+            </div>
+            <label class="switch-small">
+              <input type="checkbox" id="toggle-dim-visited">
+              <span class="slider-small"></span>
+            </label>
+          </div>
+
+          <!-- Typography Toggle -->
+          <div class="option-row">
+            <div class="option-info">
+              <span class="option-name">Modern Typography</span>
+              <span class="option-desc">Clean system sans-serif vs classic Verdana</span>
+            </div>
+            <label class="switch-small">
+              <input type="checkbox" id="toggle-font">
+              <span class="slider-small"></span>
+            </label>
+          </div>
+
+          <!-- Page Width Mode -->
+          <div class="option-row">
+            <div class="option-info">
+              <span class="option-name">Comfortable Max-Width</span>
+              <span class="option-desc">Centers content cleanly on wide screens</span>
+            </div>
+            <label class="switch-small">
+              <input type="checkbox" id="toggle-width">
+              <span class="slider-small"></span>
+            </label>
+          </div>
+
+          <!-- Header Style -->
+          <div class="option-row">
+            <div class="option-info">
+              <span class="option-name">Sleek Dark Header</span>
+              <span class="option-desc">Dark nav bar instead of bright orange</span>
+            </div>
+            <label class="switch-small">
+              <input type="checkbox" id="toggle-header">
+              <span class="slider-small"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-left">
+        <span class="shortcut-badge">Alt + Shift + D</span>
+        <span class="shortcut-tip">Quick Toggle</span>
+      </div>
+      <div class="footer-right">
+        <a href="https://news.ycombinator.com" target="_blank" class="hn-link" id="open-hn">
+          Open HN &rarr;
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

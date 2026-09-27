@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Hacker News Dark Mode",
+  "version": "1.0.0",
+  "description": "Clean, customizable dark mode theme for Hacker News (news.ycombinator.com) with zero flash of unstyled content.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    },
+    "default_title": "Hacker News Dark Mode"
+  },
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://news.ycombinator.com/*"],
+      "css": ["content/dark-theme.css"],
+      "js": ["content/content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://news.ycombinator.com/*"
+  ],
+  "commands": {
+    "toggle_theme": {
+      "suggested_key": {
+        "default": "Alt+Shift+D",
+        "mac": "Alt+Shift+D"
+      },
+      "description": "Toggle Hacker News Dark Mode on/off"
+    }
+  }
+}
